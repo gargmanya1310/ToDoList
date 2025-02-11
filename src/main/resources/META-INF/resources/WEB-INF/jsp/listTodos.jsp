@@ -3,7 +3,7 @@
         <title>List to dos page </title>
     </head>
     <body>
-    <div>Welcome to my to do list</div>
+    <div>Welcome ${name}</div>
     <div>Your Todos are ${todos}</div>
 
 
