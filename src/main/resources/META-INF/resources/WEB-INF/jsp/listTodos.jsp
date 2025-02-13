@@ -22,7 +22,7 @@
             <tr>
                 <td>${todo.id}</td>
                 <td>${todo.description}</td>
-                <td>${todo.targetData}</td>
+                <td>${todo.targetDate}</td>
                 <td>${todo.done}</td>
             </tr>
             </c:forEach>
