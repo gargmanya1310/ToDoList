@@ -49,4 +49,12 @@ public class TodoController
         todoService.addTodo(username,todo.getDescription(), LocalDate.now().plusYears(1),false); //2 way binding in post: from bean to form from form to bean
         return "redirect:list-todos";
     }
+
+    @RequestMapping("delete-todo")
+    public String deleteTodo( @RequestParam int id)
+    {
+        //to delete to do with id
+        todoService.deleteById(id);
+        return "redirect:list-todos";
+    }
 }
