@@ -2,6 +2,7 @@ package com.example.springboot.todolist.todo;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,14 +32,19 @@ public class TodoController
     public String showNewTodoPage(ModelMap model)
     {
         String username=(String)model.get("name");
-        Todo todo = new Todo(0,username,"Default Description",LocalDate.now().plusYears(1),false);      //this is one side binding : from the controller
+        Todo todo = new Todo(0,username,"",LocalDate.now().plusYears(1),false);      //this is one side binding : from the controller
         model.put("todo",todo);
         return "todo";
     }
 
 @RequestMapping(value="add-todo", method= RequestMethod.POST)
-    public String addNewTodoPage(ModelMap model,@Valid Todo todo)
+    public String addNewTodoPage(ModelMap model, @Valid Todo todo, BindingResult result)
     {
+        if(result.hasErrors())
+        {
+            return "todo";
+
+        }
         String username=(String)model.get("name");
         todoService.addTodo(username,todo.getDescription(), LocalDate.now().plusYears(1),false); //2 way binding in post: from bean to form from form to bean
         return "redirect:list-todos";
