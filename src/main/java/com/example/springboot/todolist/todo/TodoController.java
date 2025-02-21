@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import java.time.LocalDate;
 import java.util.List;
 
-@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+//@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Controller
 @SessionAttributes("name")
 public class TodoController
@@ -38,7 +38,7 @@ public class TodoController
     @RequestMapping(value="add-todo", method= RequestMethod.GET)
         public String showNewTodoPage(ModelMap model)
         {
-            String username=(String)model.get("name");
+            String username=getLoggedInUsername(model);
             Todo todo = new Todo(0,username,"",LocalDate.now().plusYears(1),false);      //this is one side binding : from the controller
             model.put("todo",todo);
             return "todo";
